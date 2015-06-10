@@ -109,3 +109,4 @@ STATIC_URL = '/static/'
 
 # Celery
 BROKER_URL = 'amqp://guest@localhost//'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
