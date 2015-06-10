@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
+from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -110,3 +111,11 @@ STATIC_URL = '/static/'
 # Celery
 BROKER_URL = 'amqp://guest@localhost//'
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERYBEAT_SCHEDULE = {
+    'add-every-1-minute': {
+        'task': 'try_celery.tasks.add',
+        'args': (1, 1),
+        'schedule': timedelta(minutes=1)
+    },
+}
+CELERY_TIMEZONE = 'UTC'
